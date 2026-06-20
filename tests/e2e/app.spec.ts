@@ -34,10 +34,29 @@ test('reset returns the app to a fresh home state', async ({ page }) => {
   await expect(page.getByText('Question 2 / 170,000')).toBeVisible();
   await page.getByRole('button', { name: 'Exit' }).click();
 
+  page.once('dialog', async (dialog) => {
+    expect(dialog.message()).toContain('Reset your saved progress?');
+    await dialog.accept();
+  });
   await page.getByRole('button', { name: 'Reset' }).click();
 
   await expect(page.getByRole('button', { name: 'Start' })).toBeVisible();
   await expect(page.getByText('0.0%')).toBeVisible();
+});
+
+test('reset confirmation can be cancelled', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: 'Start' }).click();
+  await answerWithShortcut(page);
+  await expect(page.getByText('Question 2 / 170,000')).toBeVisible();
+
+  page.once('dialog', async (dialog) => {
+    expect(dialog.message()).toContain('Reset your saved progress?');
+    await dialog.dismiss();
+  });
+  await page.getByRole('button', { name: 'Reset' }).click();
+
+  await expect(page.getByText('Question 2 / 170,000')).toBeVisible();
 });
 
 test('flashes answer feedback for correct and missed choices', async ({ page }) => {

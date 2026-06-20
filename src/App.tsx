@@ -116,13 +116,18 @@ function App() {
   }, [manifest, progress, startFresh]);
 
   const resetTest = useCallback(async () => {
+    if (progress && progress.currentIndex > 0) {
+      const confirmed = window.confirm('Reset your saved progress? This cannot be undone.');
+      if (!confirmed) return;
+    }
+
     await clearProgress();
     setProgress(undefined);
     setQuestion(undefined);
     setLastResult(undefined);
     setAnswerFlash(undefined);
     setScreen('home');
-  }, []);
+  }, [progress]);
 
   const answerQuestion = useCallback(
     async (selectedDefinition: string) => {
@@ -259,10 +264,9 @@ function HomeScreen({ manifest, progress, stats, onStart, onContinue, onReset }:
   return (
     <section className="home-grid">
       <div className="intro">
-        <p className="eyebrow">170,000-step vocabulary test</p>
         <h1>Vocabulary size test</h1>
         <p className="intro-copy">
-          A focused English vocabulary exam built from Open English WordNet. Every answer moves the counter forward.
+          A focused English vocabulary exam built from Open English WordNet.
         </p>
         <div className="action-row">
           <button className="primary-button" type="button" onClick={hasProgress ? onContinue : onStart}>
