@@ -235,6 +235,10 @@ function Shell({ children }: ShellProps) {
   return (
     <main className="app-shell">
       <div className="app-frame">{children}</div>
+      <footer className="attribution">
+        Data: Open English WordNet, derived from Princeton WordNet.{' '}
+        <a href="/data/open-english-wordnet-license.txt">CC BY 4.0</a>.
+      </footer>
     </main>
   );
 }

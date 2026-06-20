@@ -51,15 +51,34 @@ a {
 }
 
 .app-shell {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: 16px;
   min-height: 100vh;
   padding: 32px;
 }
 
 .app-frame {
   width: min(1120px, 100%);
-  min-height: calc(100vh - 64px);
+  min-height: calc(100vh - 112px);
   margin: 0 auto;
   display: grid;
+}
+
+.attribution {
+  width: min(1120px, 100%);
+  margin: 0 auto;
+  color: rgba(23, 26, 23, 0.48);
+  font-size: 0.78rem;
+  font-weight: 650;
+  line-height: 1.45;
+  text-align: center;
+}
+
+.attribution a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
 }
 
 .panel,
@@ -503,7 +522,7 @@ h2 {
   }
 
   .app-frame {
-    min-height: calc(100vh - 24px);
+    min-height: calc(100vh - 72px);
   }
 
   .home-grid,
