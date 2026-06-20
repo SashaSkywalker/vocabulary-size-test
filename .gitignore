@@ -7,3 +7,10 @@ playwright-report/
 test-results/
 public/data/
 *.log
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
