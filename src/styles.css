@@ -317,14 +317,6 @@ h2 {
   border-radius: 16px;
 }
 
-.quiz-layout[data-answer-state="correct"] .question-panel {
-  animation: panelCorrect 520ms ease-out;
-}
-
-.quiz-layout[data-answer-state="missed"] .question-panel {
-  animation: panelMissed 520ms ease-out;
-}
-
 .options-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -502,30 +494,6 @@ h2 {
   }
   100% {
     transform: translateX(0);
-  }
-}
-
-@keyframes panelCorrect {
-  0% {
-    background: transparent;
-  }
-  35% {
-    background: rgba(22, 130, 79, 0.11);
-  }
-  100% {
-    background: transparent;
-  }
-}
-
-@keyframes panelMissed {
-  0% {
-    background: transparent;
-  }
-  35% {
-    background: rgba(182, 64, 58, 0.12);
-  }
-  100% {
-    background: transparent;
   }
 }
 

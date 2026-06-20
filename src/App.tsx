@@ -306,10 +306,9 @@ interface QuizScreenProps {
 
 function QuizScreen({ manifest, progress, question, stats, isSaving, lastResult, answerFlash, onAnswer, onExit, onReset }: QuizScreenProps) {
   const questionNumber = progress.currentIndex + 1;
-  const answerState = answerFlash ? (answerFlash.isCorrect ? 'correct' : 'missed') : undefined;
 
   return (
-    <section className="quiz-layout" data-answer-state={answerState}>
+    <section className="quiz-layout">
       <header className="quiz-header">
         <div>
           <p className="eyebrow">Question {questionNumber.toLocaleString('en-US')} / {manifest.totalQuestions.toLocaleString('en-US')}</p>
@@ -409,10 +408,11 @@ function getStatsShape() {
   };
 }
 
-function getOptionClassName(option: string, correctDefinition: string, answerFlash: AnswerFlash | undefined) {
+function getOptionClassName(option: string, _correctDefinition: string, answerFlash: AnswerFlash | undefined) {
   if (!answerFlash) return 'option-button';
-  if (option === correctDefinition) return 'option-button option-button--correct';
-  if (option === answerFlash.selectedDefinition && !answerFlash.isCorrect) return 'option-button option-button--missed';
+  if (option === answerFlash.selectedDefinition) {
+    return answerFlash.isCorrect ? 'option-button option-button--correct' : 'option-button option-button--missed';
+  }
   return 'option-button option-button--muted';
 }
 

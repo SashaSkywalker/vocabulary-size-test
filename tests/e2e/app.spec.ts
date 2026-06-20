@@ -75,6 +75,7 @@ test('flashes answer feedback for correct and missed choices', async ({ page }) 
 
   await page.locator('.option-button').filter({ hasText: wrongOption }).click();
   await expect(page.locator('.option-button--missed')).toBeVisible();
+  await expect(page.locator('.option-button--correct')).toHaveCount(0);
   await expect(page.getByText('Missed')).toHaveCount(0);
 });
 
